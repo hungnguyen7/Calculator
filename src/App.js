@@ -53,13 +53,23 @@ class Calculator extends React.Component{
         expression = expression.slice(0, -1);
       }
       expression = expression.replace(/x/g, "*").replace(/‑/g, "-");
-      console.log(expression);
-      let answer = Math.round(1000000000000 * eval(expression)) / 1000000000000;
+      let answer = Math.round(1000000000000 * eval(expression)) / 1000000000000;;
+      // console.log(expression);
+      // if(eval(expression)>1){
+      //   answer = eval(expression);
+      // }
+      // else if(eval(expression)<0){
+      //   answer = eval(expression);
+      // }
+      // else{
+      //   answer =eval(expression).toPrecision(4);
+      // }
+      // console.log(answer);
       this.setState({
-        currentVal: answer.toString(),
+        currentValue: answer.toString(),
         formula:
           expression.replace(/\*/g, "⋅").replace(/-/g, "‑") + "=" + answer,
-        prevVal: answer,
+        prevValue: answer,
         evaluated: true
       });
     }
@@ -71,7 +81,7 @@ class Calculator extends React.Component{
       const {formula, prevValue, evaluated} = this.state;
       this.setState({
         currentValue: value,
-        evaluate: false
+        evaluated: false
       })
       if(evaluated){
         this.setState({
@@ -107,7 +117,8 @@ class Calculator extends React.Component{
       if(currentValue.length > 21){
         this.maxDigitWarning();
       }
-      else if(evaluated){ //trong truong hop dau bang da duoc bam truoc do, thi khi mot number duoc bam thi cac ket qua hien thi truoc do se bien mat va duoc thay the bang number vua bam
+      else if(evaluated){
+        console.log('Buzzz'); //trong truong hop dau bang da duoc bam truoc do, thi khi mot number duoc bam thi cac ket qua hien thi truoc do se bien mat va duoc thay the bang number vua bam
         this.setState({
           currentValue: value,
           formula: value !== '0' ? value:'' //Dam bao neu bam so 0 nhieu lan thi man hinh chi hien thi so 0 mot lan(ham else if binh thuong nhung du dk dung hay sai deu tra ve cung mot gia tri la value)
